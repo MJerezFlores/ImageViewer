@@ -33,22 +33,18 @@ public class ImagePanel extends JPanel implements ImageViewer{
         return image;
     }
     
-    public void paint(Graphics graphics){
+    public void paint(Graphics g){
         if (image == null) return;
-        super.paint(graphics);
-        graphics.drawImage(getBitmap(), offset, 0, null);
-        if (offset == 0) return;
-        if (offset > 0) graphics.drawImage(getBufferedImage((SwingBitMap) 
-                image.getprevImage().getBitmap()), offset - image.getBitmap().getWidth(), 0, null);   
-        if (offset < 0) graphics.drawImage(getBufferedImage((SwingBitMap) 
-                image.getnextImage().getBitmap()), image.getBitmap().getWidth() + offset, 0, null);
+        super.paint(g);
+        //g.drawImage(getBitMap(), offset, 0, null);
+        g.drawImage(getBitMap(), 0, 0, this.getWidth(), this.getHeight(), null);
     }
     
     public BufferedImage getBufferedImage (SwingBitMap swingBitmap){
         return swingBitmap.getBufferedImage();
     }
     
-    public BufferedImage getBitmap(){
+    public BufferedImage getBitMap(){
         if (image.getBitmap() instanceof SwingBitMap)
             return getBufferedImage((SwingBitMap) image.getBitmap());
         return null;
